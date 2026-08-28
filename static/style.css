@@ -1,0 +1,224 @@
+/* ===== RESET & BASE ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background: #120c0c;
+    color: #d9cfc4;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* soft red vignette glow, like standing under a darkroom safelight -
+   this project is about images and what's hidden in them, so the whole
+   page leans into a photography/forensics feel instead of a screen glow */
+.vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(193, 39, 45, 0.12) 100%),
+                radial-gradient(ellipse at top, rgba(193, 39, 45, 0.06), transparent 55%);
+}
+
+.container { max-width: 820px; margin: 0 auto; padding: 30px 25px 60px; }
+
+/* ===== HEADER ===== */
+header { margin-bottom: 22px; }
+.brand { display: flex; align-items: center; gap: 16px; }
+.brand i { font-size: 2rem; color: #c1272d; }
+.brand h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: 0.3px;
+    color: #f0e9df;
+    text-transform: uppercase;
+}
+.brand .subtitle { font-size: 0.85rem; color: #8a7d70; margin-top: 3px; }
+
+/* ===== TABS ===== */
+.tabs { display: flex; gap: 8px; margin-bottom: 22px; flex-wrap: wrap; }
+.tab-btn {
+    flex: 1;
+    min-width: 140px;
+    background: rgba(30, 20, 20, 0.6);
+    border: 1px solid rgba(193, 39, 45, 0.15);
+    color: #a89a8c;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.25s;
+}
+.tab-btn:hover { border-color: rgba(193, 39, 45, 0.4); color: #f0e9df; }
+.tab-btn.active {
+    background: rgba(193, 39, 45, 0.12);
+    border-color: #c1272d;
+    color: #f0e9df;
+}
+.tab-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    padding: 2px 7px;
+    border-radius: 20px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+.tab-tag.red { background: rgba(193, 39, 45, 0.18); color: #e8747a; }
+.tab-tag.blue { background: rgba(91, 139, 160, 0.18); color: #8bb8cc; }
+
+/* ===== TAB PANELS ===== */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.panel {
+    background: rgba(24, 16, 16, 0.6);
+    border: 1px solid rgba(193, 39, 45, 0.1);
+    border-radius: 16px;
+    padding: 26px;
+}
+.panel h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    color: #c1272d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.panel-note { font-size: 0.85rem; color: #8a7d70; line-height: 1.5; margin-bottom: 20px; }
+
+label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+    color: #8a7d70;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    margin-top: 16px;
+}
+label:first-of-type { margin-top: 0; }
+
+input[type="file"], input[type="password"], input[type="text"], textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(10, 6, 6, 0.7);
+    border: 1px solid rgba(193, 39, 45, 0.18);
+    border-radius: 8px;
+    color: #f0e9df;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+}
+textarea { min-height: 90px; resize: vertical; font-family: 'Inter', sans-serif; }
+input:focus, textarea:focus { outline: none; border-color: #c1272d; }
+
+/* ===== ACTION BUTTONS ===== */
+.btn-action {
+    width: 100%;
+    margin-top: 22px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.25s;
+}
+.btn-action.red { background: #c1272d; color: #120c0c; }
+.btn-action.red:hover { background: #d94249; }
+.btn-action.blue { background: #5b8ba0; color: #120c0c; }
+.btn-action.blue:hover { background: #74a3b8; }
+.btn-action.cream { background: #e8ded0; color: #120c0c; }
+.btn-action.cream:hover { background: #f3ebe0; }
+.btn-action:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ===== RESULTS ===== */
+.result-area { margin-top: 20px; }
+.result-msg {
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 0.87rem;
+    line-height: 1.5;
+}
+.result-msg.error { background: rgba(193, 39, 45, 0.1); border: 1px solid rgba(193, 39, 45, 0.35); color: #e8747a; }
+.result-msg.success { background: rgba(95, 184, 138, 0.1); border: 1px solid rgba(95, 184, 138, 0.35); color: #7fd4a8; }
+.result-msg.loading { color: #8a7d70; font-style: italic; }
+
+.download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    color: #7fd4a8;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+/* scan verdict card */
+.verdict-card {
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 16px;
+}
+.verdict-card.clean { background: rgba(95, 184, 138, 0.08); border: 1px solid rgba(95, 184, 138, 0.3); }
+.verdict-card.uncertain { background: rgba(224, 164, 88, 0.08); border: 1px solid rgba(224, 164, 88, 0.3); }
+.verdict-card.suspicious { background: rgba(193, 39, 45, 0.08); border: 1px solid rgba(193, 39, 45, 0.3); }
+.verdict-card.confirmed { background: rgba(193, 39, 45, 0.16); border: 1px solid #c1272d; }
+.verdict-title { font-family: 'Oswald', sans-serif; font-size: 0.95rem; margin-bottom: 4px; }
+.verdict-detail { font-size: 0.82rem; color: #a89a8c; line-height: 1.5; }
+
+.score-row { display: flex; gap: 14px; margin-top: 14px; }
+.score-box {
+    flex: 1;
+    background: rgba(10, 6, 6, 0.5);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+.score-box .score-val { display: block; font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: #f0e9df; }
+.score-box .score-label { font-size: 0.68rem; color: #8a7d70; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* the LSB plane reveal, developed like a photo in a tray */
+.lsb-reveal { margin-top: 18px; }
+.lsb-reveal h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    color: #8a7d70;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.lsb-reveal img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(193, 39, 45, 0.2);
+    animation: develop 1s ease;
+}
+@keyframes develop {
+    from { opacity: 0; filter: brightness(0.3) contrast(0.5); }
+    to { opacity: 1; filter: brightness(1) contrast(1); }
+}
+.lsb-note { font-size: 0.78rem; color: #6b5f54; margin-top: 8px; line-height: 1.5; font-style: italic; }
+
+/* ===== FOOTER ===== */
+footer { text-align: center; margin-top: 36px; font-size: 0.8rem; color: #6b5f54; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .tabs { flex-direction: column; }
+    .score-row { flex-direction: column; }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Steganographic Exfil Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+<div class="vignette"></div>
+
+<div class="container">
+
+    <header>
+        <div class="brand">
+            <i class="fas fa-image"></i>
+            <div>
+                <h1>Steganographic Exfil Simulator</h1>
+                <p class="subtitle">hide data in plain sight &middot; then learn to catch it</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="conceal" onclick="switchTab('conceal')">
+            <i class="fas fa-eye-slash"></i> Conceal <span class="tab-tag red">red team</span>
+        </button>
+        <button class="tab-btn" data-tab="detect" onclick="switchTab('detect')">
+            <i class="fas fa-magnifying-glass"></i> Detect <span class="tab-tag blue">blue team</span>
+        </button>
+        <button class="tab-btn" data-tab="reveal" onclick="switchTab('reveal')">
+            <i class="fas fa-unlock"></i> Reveal
+        </button>
+    </nav>
+
+    <!-- ===== CONCEAL TAB ===== -->
+    <section id="tab-conceal" class="tab-panel active">
+        <div class="panel">
+            <h2><i class="fas fa-eye-slash"></i> Hide a Message Inside an Image</h2>
+            <p class="panel-note">Encrypts your message first, then hides the ciphertext inside the image's pixel data. PNG only, JPEG's compression destroys hidden bits.</p>
+
+            <label>Cover image (PNG)</label>
+            <input type="file" id="concealImage" accept="image/png" />
+
+            <label>Secret message</label>
+            <textarea id="concealMessage" placeholder="Whatever you want hidden inside the image..."></textarea>
+
+            <label>Password</label>
+            <input type="password" id="concealPassword" placeholder="Encryption password" />
+
+            <button class="btn-action red" onclick="doConceal()">
+                <i class="fas fa-lock"></i> Encrypt &amp; Hide
+            </button>
+
+            <div id="concealResult" class="result-area"></div>
+        </div>
+    </section>
+
+    <!-- ===== DETECT TAB ===== -->
+    <section id="tab-detect" class="tab-panel">
+        <div class="panel">
+            <h2><i class="fas fa-magnifying-glass"></i> Scan an Image for Hidden Data</h2>
+            <p class="panel-note">Two checks: an exact signature match (only catches this tool's own output), and a statistical chi-square test that can flag LSB tampering more generally, a heuristic, not a certainty.</p>
+
+            <label>Image to scan</label>
+            <input type="file" id="detectImage" accept="image/*" />
+
+            <button class="btn-action blue" onclick="doDetect()">
+                <i class="fas fa-radar"></i> Scan Image
+            </button>
+
+            <div id="detectResult" class="result-area"></div>
+        </div>
+    </section>
+
+    <!-- ===== REVEAL TAB ===== -->
+    <section id="tab-reveal" class="tab-panel">
+        <div class="panel">
+            <h2><i class="fas fa-unlock"></i> Recover a Hidden Message</h2>
+            <p class="panel-note">If this image was concealed with this tool, the right password will decrypt and reveal the original message.</p>
+
+            <label>Stego image</label>
+            <input type="file" id="revealImage" accept="image/*" />
+
+            <label>Password</label>
+            <input type="password" id="revealPassword" placeholder="Password used to encrypt it" />
+
+            <button class="btn-action cream" onclick="doReveal()">
+                <i class="fas fa-key"></i> Decrypt &amp; Reveal
+            </button>
+
+            <div id="revealResult" class="result-area"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Hanz Christer Ortiz</p>
+    </footer>
+
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
