@@ -107,6 +107,10 @@ def api_reveal():
 
     return jsonify({"message": message})
 
-
+@app.route("/health")
+def health():
+    """Simple check to confirm the server is running."""
+    return {"status": "ok"}
+  
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
