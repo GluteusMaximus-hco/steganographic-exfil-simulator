@@ -83,10 +83,3 @@ stego-exfil-simulator/
     ├── style.css          darkroom/forensics theme
     └── dashboard.js
 ```
-
-## Why this looks different from the other two projects
-
-Third tool, third visual identity. This one leans into a photography
-darkroom feel, near-black background, a deep safelight red, warm cream
-highlights, since the whole project is about images and what's hidden
-inside them.
