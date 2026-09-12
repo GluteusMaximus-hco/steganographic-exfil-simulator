@@ -39,7 +39,7 @@ venv\Scripts\pip.exe install -r requirements.txt      # Windows, sidesteps Power
 venv\Scripts\python.exe app.py
 ```
 
-Then open **http://127.0.0.1:5002**
+Then open the local address shown in the terminal.
 
 ## Trying it out (for the best demo results)
 
