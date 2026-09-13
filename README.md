@@ -28,6 +28,8 @@ different things:
 **Reveal** — proves the round trip actually works: given the right
 password, recovers the original message from a concealed image.
 
+![Stego Image](stego.jpg)
+
 ## Install
 
 Requires Python 3.9+.
