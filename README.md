@@ -1,6 +1,6 @@
 # Steganographic Exfil Simulator
 
-A paired red team / blue team tool. Hides an encrypted message inside an
+Hides an encrypted message inside an
 image using LSB steganography (the "how attackers actually exfiltrate
 data past filters" side), and scans images to catch when that's been
 done (the "how you'd actually detect it" side).
